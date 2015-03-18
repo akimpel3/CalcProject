@@ -29,7 +29,6 @@ public class lu_fact {
         while (i < l.getHeight() && j < l.getWidth()) {
             //row multiplication
             for (int k = j + 1; k < l.getHeight(); k++) {
-                System.out.println(index);
                 double scalar = (-1) * l.getValue(k, j) / l.getValue(i, j);
                 lowerNums[index] = scalar * (-1);
                 index ++;
@@ -46,6 +45,7 @@ public class lu_fact {
         for (i = 0; i < dim; i++) {
             for (j = i + 1; j < dim; j++) {
                 uValues[j][i] = lowerNums[index];
+                index++;
             }
         }
 
@@ -62,11 +62,11 @@ public class lu_fact {
     public static void main(String[] args) {
         lu_fact lu = new lu_fact(4);
         Solution[] s = lu.findLU();
-        Matrix l = s[0].getM();
-        Matrix u = s[1].getM();
+        Matrix u = s[0].getM();
+        Matrix l = s[1].getM();
 
-        System.out.println(l);
-        System.out.println(u);
+        System.out.println(lu.a);
+        System.out.println("---LU---");
         System.out.println(l.multiplyBy(u));
     }
 }

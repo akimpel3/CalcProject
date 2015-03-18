@@ -32,7 +32,12 @@ public class Matrix {
 
     //Pretty much the same as a deep copy
     public Matrix(Matrix m) {
-        this.values = m.getValues();
+        this.values = new double[m.height][m.width];
+        for (int i = 0; i < m.height; i++) {
+            for (int j = 0; j < m.width; j++) {
+                this.values[i][j] = m.values[i][j];
+            }
+        }
         this.width = m.width;
         this.height = m.height;
     }

@@ -1,3 +1,5 @@
+//No error term yet
+
 public class lu_fact {
     public Matrix a;
     public int dim;

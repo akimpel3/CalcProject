@@ -16,9 +16,9 @@ import java.math.MathContext;
 
 public class Matrix {
 
-    private int width;
-    private int height;
-    private double values[][];
+    protected int width;
+    protected int height;
+    protected double values[][];
     private boolean showSteps = false;
 
     //Syntax: new Matrix(row1, row2, row3)
@@ -92,13 +92,14 @@ public class Matrix {
     public String toString() {
         String s = "";
         BigDecimal smallNum = new BigDecimal(10E-15);
+        BigDecimal negSmallNum = new BigDecimal(-10E-15);
 
         for (int h = 0; h < height; h++) {
             s += "[";
             for (int w = 0; w < width; w++) {
                 BigDecimal bd = new BigDecimal(values[h][w]);
                 bd = bd.round(new MathContext(6));
-                if (bd.compareTo(smallNum) == -1) {
+                if (bd.compareTo(smallNum) == -1 && bd.compareTo(negSmallNum) == 1) {
                     bd = new BigDecimal(0);
                 }
                 s += bd + "\t";
@@ -122,8 +123,8 @@ public class Matrix {
 
     public Matrix multiplyBy(Matrix v) {
         double[][] newValues = new double[this.height][v.width];
-        if (this.width == v.getHeight()) {
-            for (int column = 0; column < v.getWidth(); column++) {
+        if (this.width == v.height) {
+            for (int column = 0; column < v.width; column++) {
                 for (int row = 0; row < height; row++) {
                     for (int i = 0; i < width; i++) {
                         newValues[row][column] += values[row][i] * v.getValue(i, column);

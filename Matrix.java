@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.ArrayList;
 
 /*
  * Brian Woodbury
@@ -28,6 +29,16 @@ public class Matrix {
         check(values);
         width = values[0].length;
         this.values = values;
+    }
+
+    //Allows the user to input an arraylist of double arrays
+    public Matrix(ArrayList<double[]> someValues) {
+        double[][] newValues = new double[someValues.size()][];
+        newValues = someValues.toArray(newValues);
+        height = newValues.length;
+        check(newValues);
+        width = newValues[0].length;
+        this.values = newValues;
     }
 
     //Pretty much the same as a deep copy
@@ -174,6 +185,10 @@ public class Matrix {
             System.exit(0);
         }
         return new Matrix(newValues);
+    }
+
+    public Matrix subtract(Matrix other) {
+        return this.addTo(other.multiplyBy(-1));
     }
 
     public double determinant() {
@@ -419,10 +434,17 @@ public class Matrix {
         Matrix a = new Matrix(aValues);
         Matrix b = new Matrix(bValues);
 
+        ArrayList<double[]> aList = new ArrayList<double[]>();
+        double[] row1 = {2, 4};
+        double[] row2 = {1, 0};
+        aList.add(row1);
+        aList.add(row2);
+        Matrix test = new Matrix(aList);
+
         System.out.println(a.determinant() + "\n");
         System.out.println(a.multiplyBy(b));
         System.out.println(a.invert());
         System.out.println(a.findReducedEchelon());
-        System.out.println(a.transpose());
+        System.out.println(test);
     }
 }

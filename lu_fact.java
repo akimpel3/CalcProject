@@ -5,18 +5,8 @@ public class lu_fact {
     public int dim;
 
     public lu_fact(int dim) {
-        this.a = createHilbertMatrix(dim);
+        this.a = HilbertMatrix.createHilbertMatrix(dim);
         this.dim = dim;
-    }
-
-    public Matrix createHilbertMatrix(int dim) {
-        double values[][] = new double[dim][dim];
-        for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                values[i][j] = 1.0 / ((i + 1.0) + (j + 1.0) - 1);
-            }
-        }
-        return new Matrix(values);
     }
 
     public Solution[] findLU() {

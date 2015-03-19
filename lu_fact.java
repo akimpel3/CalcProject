@@ -9,6 +9,12 @@ public class lu_fact {
         this.dim = dim;
     }
 
+    //Finds the lu decomposition
+    //--NOTE TO NOAH--
+    //A solution array will be returned.
+    //Matrix L is in solution[1].getM()
+    //Matrix U is in solution[0].getM()
+    //Error is in solution[0].getD()
     public Solution[] findLU() {
         int i = 0;
         int j = 0;

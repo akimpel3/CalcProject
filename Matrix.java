@@ -467,6 +467,6 @@ public class Matrix {
         System.out.println(a.multiplyBy(b));
         System.out.println(a.invert());
         System.out.println(a.findReducedEchelon());
-        System.out.println(test.subMatrix(0, 0, 2, 1).toVector());
+        System.out.println(test.subMatrix(0, 0, 1, 2).toVector());
     }
 }

@@ -13,7 +13,18 @@ public class Vector extends Matrix {
     @Override
     public String toString() {
         String s = "";
-        
+        if (this.isVertical) {
+            for (int i = 0; i < this.width; i++) {
+                s += "< " + values[0][i] + " >\n";
+            }
+        } else {
+            s += "< ";
+            for (int i = 0; i < this.width; i++) {
+                s += values[0][i] + "\t";
+            }
+            s += ">";
+        }
+        return s;
     }
 
     public Vector deepCopy() {

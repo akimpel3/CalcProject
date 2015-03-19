@@ -1,5 +1,5 @@
 public class Vector extends Matrix {
-    boolean isVertical = true;
+    public boolean isVertical = true;
 
     public Vector(boolean isVertical, double ... values) {
         super(values);

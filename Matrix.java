@@ -121,6 +121,16 @@ public class Matrix {
         return returnValue;
     }
 
+    public Matrix transpose() {
+        double newValues[][] = new double[this.width][this.height];
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
+                newValues[j][i] = this.getValue(i, j);
+            }
+        }
+        return new Matrix(newValues);
+    }
+
     public Matrix multiplyBy(Matrix v) {
         double[][] newValues = new double[this.height][v.width];
         if (this.width == v.height) {
@@ -413,5 +423,6 @@ public class Matrix {
         System.out.println(a.multiplyBy(b));
         System.out.println(a.invert());
         System.out.println(a.findReducedEchelon());
+        System.out.println(a.transpose());
     }
 }

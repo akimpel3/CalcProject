@@ -51,7 +51,27 @@ public class Vector extends Matrix {
         return product;
     }
 
-    public void transpose() {
+    public double magnitude() {
+        double total = 0;
+        for (int i = 0; i < this.width; i++) {
+            total += values[0][i] * values[0][i];
+        }
+        return Math.sqrt(total);
+    }
+
+    public Vector crossProduct(Vector other) {
+        if (this.width != 3 || other.width != 3) {
+            System.out.println("Cross product is not defined for these dimensions");
+            System.exit(0);
+        }
+        double i = this.values[0][1] * other.values[0][2] - this.values[0][2] * other.values[0][1];
+        double j = this.values[0][2] * other.values[0][0] - this.values[0][0] * other.values[0][2];
+        double k = this.values[0][0] * other.values[0][1] - this.values[0][1] * other.values[0][0];
+        return new Vector(i, j, k);
+    }
+
+    //Had to change the method name. Take note!!!
+    public void vectorTranspose() {
         isVertical = !isVertical;
     }
 
@@ -61,6 +81,6 @@ public class Vector extends Matrix {
         System.out.println(v);
         System.out.println(u);
         u.transpose();
-        System.out.println(v.multiplyBy(u));
+        System.out.println(v.crossProduct(u));
     }
 }

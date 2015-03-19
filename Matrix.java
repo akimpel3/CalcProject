@@ -408,6 +408,28 @@ public class Matrix {
         }
     }
 
+    public Vector toVector() {
+        double newValues[];
+        boolean isVertical = true;
+        if (this.width == 1) {
+            newValues = new double[this.height];
+            for (int i = 0; i < this.height; i++) {
+                newValues[i] = this.values[i][0];
+            }
+        } else if (this.height == 1) {
+            newValues = new double[this.width];
+            isVertical = false;
+            for (int i = 0; i < this.width; i++) {
+                newValues[i] = this.values[0][i];
+            }
+        } else {
+            System.out.println("This matrix cannot be converted to a vector");
+            System.exit(0);
+            newValues = new double[0];
+        }
+        return new Vector(isVertical, newValues);
+    }
+
     public boolean isSquare() {
         return (height == width);
     }
@@ -445,6 +467,6 @@ public class Matrix {
         System.out.println(a.multiplyBy(b));
         System.out.println(a.invert());
         System.out.println(a.findReducedEchelon());
-        System.out.println(test);
+        System.out.println(test.subMatrix(0, 0, 2, 1).toVector());
     }
 }

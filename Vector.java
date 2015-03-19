@@ -10,6 +10,12 @@ public class Vector extends Matrix {
         super(values);
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        
+    }
+
     public Vector deepCopy() {
         double[] newValues = new double[this.width];
         for (int i = 0; i < this.width; i++) {

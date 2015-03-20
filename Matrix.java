@@ -430,6 +430,31 @@ public class Matrix {
         return new Vector(isVertical, newValues);
     }
 
+    //pass in the number of iterations
+    public double maxEigenValue(int numIterations) {
+        if (!this.isSquare()) {
+            System.out.println("Matrix must be square");
+            System.exit(0);
+        }
+
+        double[][] firstGuess = new double[this.width][1];
+        for (int i = 0; i < this.width; i++) {
+            firstGuess[i][0] = 1;
+        }
+        Matrix guess = new Matrix(firstGuess);
+
+        for (int i = 0; i < numIterations; i++) {
+            guess = this.multiplyBy(guess);
+            guess = guess.multiplyBy(1 / guess.values[0][0]);
+        }
+
+        Matrix ax = this.multiplyBy(guess);
+        double topDotProduct = ax.toVector().dotProduct(guess.toVector());
+        double bottomDotProduct = guess.toVector().dotProduct(guess.toVector());
+
+        return topDotProduct / bottomDotProduct;
+    }
+
     public boolean isSquare() {
         return (height == width);
     }
@@ -451,11 +476,15 @@ public class Matrix {
                               {0,     5,  -3, -1},
                               {-2,    2, 1.5,  0},
                               {7,     4,  -2,  2}};
+        double[][] cValues = {{ 1, -2, -2},
+                              {-2,  4,  4},
+                              {-2,  4,  4}};
 
         //Creating the matrices from the 2d arrays
         Matrix a = new Matrix(aValues);
         Matrix b = new Matrix(bValues);
+        Matrix c = new Matrix(cValues);
 
-        System.out.println(a.subtract(b));
+        System.out.println(c.maxEigenValue(50));
     }
 }

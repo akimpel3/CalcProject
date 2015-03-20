@@ -142,6 +142,43 @@ public class Matrix {
         return new Matrix(newValues);
     }
 
+    public Matrix getDiag() {
+        double[][] d = new double[this.getHeight()][this.getWidth()];
+        for (int y = 0; y < this.getHeight(); ++y) {
+            for (int x = 0; x < this.getWidth(); ++x) {
+                if (y == x) {
+                    d[y][x] = this.getValue(y, x);
+                }
+            }
+        }
+        return new Matrix(d);
+    }
+
+    public Matrix getU() {
+        double[][] u = new double[this.getHeight()][this.getWidth()];
+        for (int y = 0; y < this.getHeight(); ++ y) {
+            for (int x = 0; x < this.getWidth(); ++ x) {
+                if (y < x) {
+                    u[y][x] = this.getValue(y, x);
+                }
+            }
+        }
+        return new Matrix(u);
+    }
+
+    public Matrix getL() {
+        double[][] l = new double[this.getHeight()][this.getWidth()];
+        for (int y = 0; y < this.getHeight(); ++ y) {
+            for (int x = 0; x < this.getWidth(); ++ x) {
+                if (y > x) {
+                    l[y][x] = this.getValue(y, x);
+                }
+            }
+        }
+        return new Matrix(l);
+    }
+
+
     public Matrix multiplyBy(Matrix v) {
         double[][] newValues = new double[this.height][v.width];
         if (this.width == v.height) {
@@ -445,14 +482,19 @@ public class Matrix {
 
         for (int i = 0; i < numIterations; i++) {
             guess = this.multiplyBy(guess);
-            guess = guess.multiplyBy(1 / guess.values[0][0]);
+            if (guess.values[0][0] != 0) {
+                guess = guess.multiplyBy(1 / guess.values[0][0]);
+            }
         }
 
         Matrix ax = this.multiplyBy(guess);
         double topDotProduct = ax.toVector().dotProduct(guess.toVector());
         double bottomDotProduct = guess.toVector().dotProduct(guess.toVector());
-
-        return topDotProduct / bottomDotProduct;
+        if (bottomDotProduct != 0) {
+            return topDotProduct / bottomDotProduct;
+        } else {
+            return 0;
+        }
     }
 
     public boolean isSquare() {

@@ -85,6 +85,28 @@ public class Vector extends Matrix {
         return Math.sqrt(total);
     }
 
+    public boolean isWithinTolOf (Vector v, double tol) {
+        boolean result = true;
+        if (v.isVertical != this.isVertical) {
+            v = v.transpose().toVector();
+        }
+        Vector temp = v.subtract(this).toVector();
+        if (temp.isVertical) {
+            for (int i = 0; i < temp.getHeight(); ++i) {
+                if (temp.getValue(i , 0) > tol) {
+                    result = false;
+                }
+            }
+        } else {
+            for (int i = 0; i < temp.getWidth(); ++i) {
+                if (temp.getValue(0 , i) > tol) {
+                    result = false;
+                }
+            }
+        }
+        return result;
+    }
+
     public Vector crossProduct(Vector other) {
         if (this.width != 3 || other.width != 3) {
             System.out.println("Cross product is not defined for these dimensions");

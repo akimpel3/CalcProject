@@ -50,10 +50,13 @@ public class lu_fact {
         for (i = 0; i < dim; i++) {
             lValues[i][i] = 1;
         }
+        Matrix l = new Matrix(lValues);
 
         //Error part
-        double error = 0;
-        Solution[] sol = {new Solution(new Matrix(lValues), error), new Solution(u)};
+        Matrix errorMatrix = (l.multiplyBy(u)).subtract(a);
+        double maxEV = errorMatrix.multiplyBy(errorMatrix.transpose()).maxEigenValue(20);
+        double error = Math.sqrt(maxEV);
+        Solution[] sol = {new Solution(l, error), new Solution(u)};
         return sol;
     }
 
@@ -64,5 +67,6 @@ public class lu_fact {
         Matrix u = s[1].getM();
         System.out.println(l);
         System.out.println(u);
+        System.out.println(s[0].getD());
     }
 }

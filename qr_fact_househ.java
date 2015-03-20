@@ -10,7 +10,6 @@ public class qr_fact_househ {
     public Solution[] findQRHouseh() {
         Matrix r = new Matrix(a);
         Matrix q = new Matrix(dim);
-        double error = 0;
         for (int i = 0; i < dim - 1; i++) {
             Matrix x = r.subMatrix(i, i, a.height, i + 1);
             double xMagnitude = x.toVector().magnitude();
@@ -26,6 +25,11 @@ public class qr_fact_househ {
             r = h.multiplyBy(r);
             q = q.multiplyBy(h);
         }
+
+        //Error Part
+        Matrix errorMatrix = (q.multiplyBy(r)).subtract(a);
+        double maxEV = errorMatrix.multiplyBy(errorMatrix.transpose()).maxEigenValue(20);
+        double error = Math.sqrt(maxEV);
         Solution[] sol = {new Solution(q, error), new Solution(r)};
         return sol;
     }
@@ -49,5 +53,6 @@ public class qr_fact_househ {
         Solution[] s = qr.findQRHouseh();
         System.out.println(s[0].getM());
         System.out.println(s[1].getM());
+        System.out.println(s[0].getD());
     }
 }

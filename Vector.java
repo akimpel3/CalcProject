@@ -35,6 +35,15 @@ public class Vector extends Matrix {
         return new Vector(newValues);
     }
 
+    public Vector addTo(Vector other) {
+        double[] newValues = new double[this.width];
+        for (int i = 0; i < this.width; i++) {
+            newValues[i] = this.values[0][i] + other.values[0][i];
+        }
+        return new Vector(newValues);
+    }
+
+
     public Matrix toMatrix() {
         double newValues[][];
         if (isVertical) {

@@ -62,10 +62,7 @@ public class lu_fact {
         Solution[] s = lu.findLU();
         Matrix l = s[0].getM();
         Matrix u = s[1].getM();
-
-        System.out.println(lu.a);
         System.out.println(l);
-        System.out.println("---LU---");
-        System.out.println(l.multiplyBy(u));
+        System.out.println(u);
     }
 }

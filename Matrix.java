@@ -113,7 +113,7 @@ public class Matrix {
                 if (bd.compareTo(smallNum) == -1 && bd.compareTo(negSmallNum) == 1) {
                     bd = new BigDecimal(0);
                 }
-                s += bd + "\t";
+                s += String.format("% 6.6f", bd) + "  ";
             }
             s += "]\n";
         }
@@ -177,7 +177,7 @@ public class Matrix {
         if (other.getWidth() == width && other.getHeight() == height) {
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
-                    newValues[i][j] += other.getValue(i, j);
+                    newValues[i][j] = this.values[i][j] + other.getValue(i, j);
                 }
             }
         } else {
@@ -456,17 +456,6 @@ public class Matrix {
         Matrix a = new Matrix(aValues);
         Matrix b = new Matrix(bValues);
 
-        ArrayList<double[]> aList = new ArrayList<double[]>();
-        double[] row1 = {2, 4};
-        double[] row2 = {1, 0};
-        aList.add(row1);
-        aList.add(row2);
-        Matrix test = new Matrix(aList);
-
-        System.out.println(a.determinant() + "\n");
-        System.out.println(a.multiplyBy(b));
-        System.out.println(a.invert());
-        System.out.println(a.findReducedEchelon());
-        System.out.println(test.subMatrix(0, 0, 1, 2).toVector());
+        System.out.println(a.subtract(b));
     }
 }

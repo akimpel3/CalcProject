@@ -1,0 +1,34 @@
+public class power_method {
+
+	public static void main(String[] args){
+		double[][] aValues = {{3, 4, 1},
+							  {7, 2, 3} ,
+							  {2, 4,  5}};
+		double[][] bValues = {{2},
+							   {2},
+								{2}};
+		Matrix a = new Matrix(aValues);
+		Matrix initial = new Matrix(bValues);
+		Matrix eigenvector = initial;
+
+		
+		for (int i = 0; i < 100; i++) {
+			double sigma = .01;
+
+			Matrix x = a.multiplyBy(eigenvector);
+
+			double eig = x.getValue(0, 0);
+
+			eigenvector = x.multiplyBy( 1 / eig);
+
+			System.out.println("Estimated Eigenvalue = " + eig);
+			System.out.println("Estimated Eigenvector = " + "\n" + eigenvector);
+
+		}
+
+
+
+
+
+	}
+}

@@ -15,4 +15,8 @@ Does LU factorization where L is a lower triangular matrix and U is an upper tra
 qr_fact_househ:
 Nothing yet.
 
--Brian
+power_method:
+Calculates eigenvalues over a set number of iterations.
+TODO: Figure out what error tolerance is.
+
+-Brian & Kimpo 

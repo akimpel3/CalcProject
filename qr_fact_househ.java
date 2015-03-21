@@ -7,6 +7,12 @@ public class qr_fact_househ {
         this.dim = dim;
     }
 
+    //Finds the qr decomposition
+    //--NOTE TO NOAH--
+    //A solution array will be returned.
+    //Matrix Q is in solution[0].getM()
+    //Matrix R is in solution[1].getM()
+    //Error is in solution[0].getD()
     public Solution[] findQRHouseh() {
         Matrix r = new Matrix(a);
         Matrix q = new Matrix(dim);

@@ -1,6 +1,11 @@
+
+
+
+
+    
 public class power_method {
 
-    public String power_method() {
+    public static String power_method(double sigma) {
         double[][] aValues = {{3, 4, 1},
                               {7, 2, 3} ,
                               {2, 4,  5}};
@@ -10,19 +15,31 @@ public class power_method {
         Matrix a = new Matrix(aValues);
         Matrix initial = new Matrix(bValues);
         Matrix eigenvector = initial;
-        double eig = 0;
+        double currentEigenvalue = 1;
+        double lastEigenvalue = 0;
         
-        for (int i = 0; i < 1000;i++) {
-            double sigma = .01;
+        for (int i = 0; i < 1000; i++) {
 
             Matrix x = a.multiplyBy(eigenvector);
 
-            eig = x.getValue(0, 0);
+            currentEigenvalue = x.getValue(0, 0);
 
-            eigenvector = x.multiplyBy( 1 / eig);
+            if (Math.abs(currentEigenvalue - lastEigenvalue) < sigma){
+                return "Estimated Maximum Eigenvalue = " + currentEigenvalue + "." 
+                        + "\nEstimated Eigenvector = \n" + eigenvector;
+            }
+
+            eigenvector = x.multiplyBy( 1 / currentEigenvalue);
+
+            lastEigenvalue = currentEigenvalue;
+
+            System.out.println("Eigenvalue: " + currentEigenvalue);
+            System.out.println("Eigenvector: \n" + eigenvector);
+
 
         }
-        return "Estimated Eigenvalue = " + eig + ". " + "\n Estimated Eigenvector = " + eigenvector;
+        return "Estimated Maximum Eigenvalue = " + currentEigenvalue + "." 
+                        + "\nEstimated Eigenvector = \n" + eigenvector;
 
     }
 }

@@ -1,8 +1,3 @@
-
-
-
-
-    
 public class power_method {
 
     public static String power_method(double sigma) {
@@ -21,22 +16,13 @@ public class power_method {
         for (int i = 0; i < 1000; i++) {
 
             Matrix x = a.multiplyBy(eigenvector);
-
             currentEigenvalue = x.getValue(0, 0);
-
-            if (Math.abs(currentEigenvalue - lastEigenvalue) < sigma){
+            if (Math.abs(currentEigenvalue - lastEigenvalue) < sigma) {
                 return "Estimated Maximum Eigenvalue = " + currentEigenvalue + "." 
                         + "\nEstimated Eigenvector = \n" + eigenvector;
-            }
-
+                }
             eigenvector = x.multiplyBy( 1 / currentEigenvalue);
-
             lastEigenvalue = currentEigenvalue;
-
-            System.out.println("Eigenvalue: " + currentEigenvalue);
-            System.out.println("Eigenvector: \n" + eigenvector);
-
-
         }
         return "Estimated Maximum Eigenvalue = " + currentEigenvalue + "." 
                         + "\nEstimated Eigenvector = \n" + eigenvector;
